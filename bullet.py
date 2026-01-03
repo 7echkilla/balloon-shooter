@@ -1,20 +1,35 @@
+import os
 import pygame
 
-class Bullet(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        super().__init__()
-        self.image = pygame.Surface((5, 10))
-        self.image.fill((0, 0, 0))
-        self.rect = self.image.get_rect(center=(x, y))
-        self.speed = -8
-
-    def update(self):
-        self.rect.y += self.speed
-        if self.rect.bottom < 0:
-            self.kill()
-
+from dotenv import load_dotenv
+load_dotenv("config.env")
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, left, y):
         super().__init__()
-        self.
+        
+        screen_width = int(os.getenv("GAME_WIDTH"))
+        screen_height = int(os.getenv("GAME_HEIGHT"))
+
+        base_path = os.path.dirname(__file__)
+        # image_path = os.path.join(base_path, "assets", "cannon.png")
+        sound_path = os.path.join(base_path, "assets", "grenade.mp3")
+
+        width = screen_width // 100
+        height = screen_height // 100
+        black = (0, 0, 0)
+
+        self.image = pygame.Surface((width, height))
+        self.image.fill(black)
+        self.rect = self.image.get_rect(center=(left, y))
+        self._sound = pygame.mixer.Sound(sound_path)
+        self._speed = 8
+        self._horizontal_maximum = screen_width
+
+    def update(self):
+        self.rect.x += self._speed
+        if self.rect.x > self._horizontal_maximum:
+            self.kill()
+
+    def collision(self):
+        self._sound.play()

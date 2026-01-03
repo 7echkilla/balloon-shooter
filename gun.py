@@ -3,19 +3,22 @@ import pygame
 
 from bullet import Bullet
 
+from dotenv import load_dotenv
+load_dotenv("config.env")
+
 class Gun(pygame.sprite.Sprite):
-    def __init__(self, screen_width, screen_height):
+    def __init__(self):
         super().__init__()
 
-        width = screen_width // 10
-        height = screen_height // 10
-
-        self._vertical_minimum = 0
-        self._vertical_maximum = screen_height
+        screen_width = int(os.getenv("GAME_WIDTH"))
+        screen_height = int(os.getenv("GAME_HEIGHT"))
 
         base_path = os.path.dirname(__file__)
         image_path = os.path.join(base_path, "assets", "cannon.png")
         sound_path = os.path.join(base_path, "assets", "silencer.mp3")
+
+        width = screen_width // 10
+        height = screen_height // 10
 
         self.image = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (width, height))
         self._sound = pygame.mixer.Sound(sound_path)
@@ -24,7 +27,9 @@ class Gun(pygame.sprite.Sprite):
         self.rect.left = screen_width // 20
         self.rect.centery = screen_height // 2
 
-        self._speed = 6
+        self._vertical_minimum = 0
+        self._vertical_maximum = screen_height
+        self._speed = 5
 
     def update(self, keys):
         if keys[pygame.K_w] and self.rect.top > self._vertical_minimum:
