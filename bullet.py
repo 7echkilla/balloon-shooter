@@ -12,3 +12,9 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.y += self.speed
         if self.rect.bottom < 0:
             self.kill()
+
+
+class Bullet(pygame.sprite.Sprite):
+    def __init__(self, left, y):
+        super().__init__()
+        self.

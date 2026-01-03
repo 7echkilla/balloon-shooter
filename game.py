@@ -25,9 +25,10 @@ class Game:
         self._bullets = pygame.sprite.Group()
         self._balloons = pygame.sprite.Group() 
         self._gun = Gun()
-
         self._sprites.add(self._gun)
+
         self._score = 0
+        self._level = 1
 
     def spawn_balloon(self):
         balloon = Balloon()
