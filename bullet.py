@@ -12,7 +12,6 @@ class Bullet(pygame.sprite.Sprite):
         screen_height = int(os.getenv("GAME_HEIGHT"))
 
         base_path = os.path.dirname(__file__)
-        # image_path = os.path.join(base_path, "assets", "cannon.png")
         sound_path = os.path.join(base_path, "assets", "grenade.mp3")
 
         width = screen_width // 100
@@ -32,4 +31,5 @@ class Bullet(pygame.sprite.Sprite):
             self.kill()
 
     def collision(self):
-        self._sound.play()
+        # self._sound.play()
+        self.kill()

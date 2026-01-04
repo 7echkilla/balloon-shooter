@@ -11,25 +11,49 @@ class Balloon(pygame.sprite.Sprite):
 
         screen_width = int(os.getenv("GAME_WIDTH"))
         screen_height = int(os.getenv("GAME_HEIGHT"))
+        self._speed = int(os.getenv("BALLOON_SPEED"))
         diameter = screen_width // 10
-
-        base_path = os.path.dirname(__file__)
-        image_path = os.path.join(base_path, "assets", "balloon.png")
-        
         self._horizontal_minimum = screen_width // 2 + diameter // 2
         self._horizontal_maximum = screen_width - diameter // 2
         self._vertical_minimum = 0 + diameter // 2
         self._vertical_maximum = screen_height - diameter // 2
 
+        base_path = os.path.dirname(__file__)
+        image_path = os.path.join(base_path, "assets", "balloon.png")
+        sound_path = os.path.join(base_path, "assets", "grenade.mp3")
+        
         self.image = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (diameter, diameter))
         self.rect = self.image.get_rect()
+        self._sound = pygame.mixer.Sound(sound_path)
 
         self.rect.centerx = random.randint(self._horizontal_minimum , self._horizontal_maximum)
         self.rect.centery = random.randint(self._vertical_minimum, self._vertical_maximum)
+        self._set_direction()
 
-        self.speed = random.randint(1, 3)
+    def _set_direction(self):
+        self._speed_x = random.randint(-self._speed, self._speed)
+        self._speed_y = random.randint(-self._speed, self._speed)
+        self._frames_counter = random.randint(10, 40)
 
     def update(self):
-        self.rect.y -= self.speed
-        if self.rect.bottom < 0:
-            self.kill()
+        self.rect.centerx += self._speed_x
+        self.rect.centery += self._speed_y
+        self._frames_counter -= 1
+
+        if (
+            self._frames_counter <= 0
+            # Redirect on bounds
+            or self.rect.left <= self._horizontal_minimum
+            or self.rect.left >= self._horizontal_maximum
+            or self.rect.top <= self._vertical_minimum
+            or self.rect.bottom >= self._vertical_maximum
+        ):
+            self._set_direction()
+
+        # Clamp bounds
+        self.rect.centerx = max(self._horizontal_minimum, min(self.rect.centerx, self._horizontal_maximum))
+        self.rect.centery = max(self._vertical_minimum, min(self.rect.centery, self._vertical_maximum))
+
+    def collision(self):
+        self._sound.play()
+        self.kill()

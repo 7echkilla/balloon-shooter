@@ -12,6 +12,7 @@ class Gun(pygame.sprite.Sprite):
 
         screen_width = int(os.getenv("GAME_WIDTH"))
         screen_height = int(os.getenv("GAME_HEIGHT"))
+        self._speed = int(os.getenv("GUN_SPEED"))
 
         base_path = os.path.dirname(__file__)
         image_path = os.path.join(base_path, "assets", "cannon.png")
@@ -29,7 +30,6 @@ class Gun(pygame.sprite.Sprite):
 
         self._vertical_minimum = 0
         self._vertical_maximum = screen_height
-        self._speed = 5
 
     def update(self, keys):
         if keys[pygame.K_w] and self.rect.top > self._vertical_minimum:
