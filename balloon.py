@@ -1,4 +1,5 @@
 import os
+import sys
 import pygame
 import random
 
@@ -33,7 +34,7 @@ class Balloon(pygame.sprite.Sprite):
     def _set_direction(self):
         self._speed_x = random.randint(-self._speed, self._speed)
         self._speed_y = random.randint(-self._speed, self._speed)
-        self._frames_counter = random.randint(10, 40)
+        self._frames_counter = random.randint(60, 120)
 
     def update(self):
         self.rect.centerx += self._speed_x
@@ -57,3 +58,34 @@ class Balloon(pygame.sprite.Sprite):
     def collision(self):
         self._sound.play()
         self.kill()
+
+if __name__ == "__main__":
+    pygame.init()
+
+    screen_width = 800
+    screen_height = 600
+    screen = pygame.display.set_mode((screen_width, screen_height))
+
+    fps = 60
+    clock = pygame.time.Clock()
+
+    sprites = pygame.sprite.Group()
+    balloon = Balloon()
+    sprites.add(balloon)
+
+    running = True
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        clock.tick(fps)
+        sprites.update()
+        screen.fill((255, 255, 255))
+        sprites.draw(screen)
+
+        pygame.display.flip()
+    
+    pygame.quit()
+    sys.exit()

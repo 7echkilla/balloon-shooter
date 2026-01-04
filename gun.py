@@ -44,4 +44,4 @@ class Gun(pygame.sprite.Sprite):
     
 if __name__ == "__main__":
     pygame.init()
-    gun = Gun(900, 500)
+    gun = Gun()
