@@ -62,8 +62,8 @@ class Balloon(pygame.sprite.Sprite):
 if __name__ == "__main__":
     pygame.init()
 
-    screen_width = 800
-    screen_height = 600
+    screen_width = int(os.getenv("GAME_WIDTH"))
+    screen_height = int(os.getenv("GAME_HEIGHT"))
     screen = pygame.display.set_mode((screen_width, screen_height))
 
     fps = 60

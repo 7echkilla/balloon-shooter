@@ -1,4 +1,5 @@
 import os
+import sys
 import pygame
 
 from bullet import Bullet
@@ -19,7 +20,7 @@ class Gun(pygame.sprite.Sprite):
         sound_path = os.path.join(base_path, "assets", "silencer.mp3")
 
         width = screen_width // 10
-        height = screen_height // 10
+        height = screen_height // 5
 
         self.image = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (width, height))
         self._sound = pygame.mixer.Sound(sound_path)
@@ -44,4 +45,39 @@ class Gun(pygame.sprite.Sprite):
     
 if __name__ == "__main__":
     pygame.init()
+
+    screen_width = int(os.getenv("GAME_WIDTH"))
+    screen_height = int(os.getenv("GAME_HEIGHT"))
+    screen = pygame.display.set_mode((screen_width, screen_height))
+
+    fps = 60
+    clock = pygame.time.Clock()
+
+    sprites = pygame.sprite.Group()
+    bullets = pygame.sprite.Group()
     gun = Gun()
+    sprites.add(gun)
+
+    running = True
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    bullet = gun.shoot()
+                    sprites.add(bullet)
+                    bullets.add(bullet)
+
+        clock.tick(fps)
+        gun.update(pygame.key.get_pressed())
+        bullets.update()
+
+        screen.fill((255, 255, 255))
+        sprites.draw(screen)
+
+        pygame.display.flip()
+    
+    pygame.quit()
+    sys.exit()

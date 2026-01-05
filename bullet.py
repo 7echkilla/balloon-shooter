@@ -10,6 +10,7 @@ class Bullet(pygame.sprite.Sprite):
         
         screen_width = int(os.getenv("GAME_WIDTH"))
         screen_height = int(os.getenv("GAME_HEIGHT"))
+        self._speed = int(os.getenv("BULLET_SPEED"))
 
         base_path = os.path.dirname(__file__)
         sound_path = os.path.join(base_path, "assets", "grenade.mp3")
@@ -22,12 +23,11 @@ class Bullet(pygame.sprite.Sprite):
         self.image.fill(black)
         self.rect = self.image.get_rect(center=(left, y))
         self._sound = pygame.mixer.Sound(sound_path)
-        self._speed = 8
         self._horizontal_maximum = screen_width
 
     def update(self):
-        self.rect.x += self._speed
-        if self.rect.x > self._horizontal_maximum:
+        self.rect.centerx += self._speed
+        if self.rect.left >= self._horizontal_maximum:
             self.kill()
 
     def collision(self):
