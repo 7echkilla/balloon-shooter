@@ -1,6 +1,6 @@
 import os
+import sys
 import pygame
-import random
 
 from dotenv import load_dotenv
 from level_1 import Level1
@@ -37,13 +37,11 @@ class Game:
             self._current_level = Level1
         elif self._level_choice == 2:
             self._current_level = Level2
-        
-        # Setup sprites on level selection
-        if self._current_level:
-            self._current_level.setup()
 
     def game_loop(self):
         while self._running:
+            self._handle_events()
+
             if not self._level_choice:
                 self._select_level()
             else:
@@ -54,7 +52,7 @@ class Game:
 
             if self._current_level.check_win_condition():
                 print(f"Level {self._level_choice} Complete!")
-                self.running = False
+                self._running = False
 
             self._clock.tick(self._fps)
 
@@ -64,15 +62,14 @@ class Game:
                 self._running = False
 
             if event.type == pygame.KEYDOWN:
-                if event.type == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE:
                     self._current_level.spawn_bullet()
-
-    def draw(self):
-        pass
 
     def quit(self):
         pygame.quit()
+        sys.exit()
 
 if __name__ == "__main__":
     game = Game()
     game.game_loop()
+    game.quit()

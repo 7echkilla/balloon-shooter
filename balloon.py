@@ -21,7 +21,7 @@ class Balloon(pygame.sprite.Sprite):
 
         base_path = os.path.dirname(__file__)
         image_path = os.path.join(base_path, "assets", "balloon.png")
-        sound_path = os.path.join(base_path, "assets", "grenade.mp3")
+        sound_path = os.path.join(base_path, "assets", "pop.mp3")
         
         self.image = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (diameter, diameter))
         self.rect = self.image.get_rect()
