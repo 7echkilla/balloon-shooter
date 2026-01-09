@@ -2,13 +2,13 @@ import os
 import sys
 import pygame
 
-from gun import Gun
-from bullet import Bullet
-from balloon import Balloon
+from src.gun import Gun
+from src.bullet import Bullet
+from src.balloon import Balloon
+# from abc import ABC, abstractmethod
 
-class Level:
-    def __init__(self, level_number):
-        self._level_number = level_number
+class Level():
+    def __init__(self):
         self._background = None
 
         self._sprites = pygame.sprite.Group()
@@ -16,11 +16,12 @@ class Level:
         self._balloons = pygame.sprite.Group() 
 
         self._gun = Gun()
-        self._balloon = Balloon()
-        
         self._sprites.add(self._gun)
-        self._sprites.add(self._balloon)
-        self._balloons.add(self._balloon)
+
+        self._setup()
+
+    def _setup(self):
+        pass
 
     def update(self):
         keys = pygame.key.get_pressed()
@@ -29,7 +30,7 @@ class Level:
         self._balloons.update()
 
         collision = pygame.sprite.groupcollide(self._balloons, self._bullets, True, True)
-        # print(collision, collision.type())
+        
         for balloon, bullets in collision.items():
             balloon.collision()
             for bullet in bullets:
@@ -41,10 +42,7 @@ class Level:
         self._sprites.draw(screen)
         
     def check_win_condition(self):
-        if len(self._balloons) <= 0:
-            return True
-        else:
-            return False
+        pass
         
     def spawn_bullet(self):
         bullet = self._gun.shoot()
@@ -61,7 +59,7 @@ if __name__ == "__main__":
     fps = 60
     clock = pygame.time.Clock()
 
-    level = Level(1)
+    level = Level()
 
     running = True
 

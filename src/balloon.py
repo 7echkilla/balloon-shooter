@@ -19,9 +19,9 @@ class Balloon(pygame.sprite.Sprite):
         self._vertical_minimum = 0 + diameter // 2
         self._vertical_maximum = screen_height - diameter // 2
 
-        base_path = os.path.dirname(__file__)
-        image_path = os.path.join(base_path, "assets", "balloon.png")
-        sound_path = os.path.join(base_path, "assets", "pop.mp3")
+        asset_path = os.path.join(os.path.dirname(__file__), "..", "assets")
+        image_path = os.path.join(asset_path, "balloon.png")
+        sound_path = os.path.join(asset_path, "pop.mp3")
         
         self.image = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (diameter, diameter))
         self.rect = self.image.get_rect()
@@ -44,10 +44,10 @@ class Balloon(pygame.sprite.Sprite):
         if (
             self._frames_counter <= 0
             # Redirect on bounds
-            or self.rect.left <= self._horizontal_minimum
-            or self.rect.left >= self._horizontal_maximum
-            or self.rect.top <= self._vertical_minimum
-            or self.rect.bottom >= self._vertical_maximum
+            or self.rect.centerx <= self._horizontal_minimum
+            or self.rect.centerx >= self._horizontal_maximum
+            or self.rect.centery <= self._vertical_minimum
+            or self.rect.centery >= self._vertical_maximum
         ):
             self._set_direction()
 
