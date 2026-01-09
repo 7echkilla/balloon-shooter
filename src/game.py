@@ -3,8 +3,8 @@ import sys
 import pygame
 
 from dotenv import load_dotenv
-from level_1 import Level1
-from level_2 import Level2
+from src.level_1 import Level1
+from src.level_2 import Level2
 
 load_dotenv("config.env")
 

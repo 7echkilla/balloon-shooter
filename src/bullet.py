@@ -12,8 +12,8 @@ class Bullet(pygame.sprite.Sprite):
         screen_height = int(os.getenv("GAME_HEIGHT"))
         self._speed = int(os.getenv("BULLET_SPEED"))
 
-        base_path = os.path.dirname(__file__)
-        sound_path = os.path.join(base_path, "assets", "impact.mp3")
+        asset_path = os.path.join(os.path.dirname(__file__), "..", "assets")
+        sound_path = os.path.join(asset_path, "impact.mp3")
 
         width = screen_width // 100
         height = screen_height // 100

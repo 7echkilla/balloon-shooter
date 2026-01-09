@@ -1,4 +1,4 @@
-from level import Level
+from src.level import Level
 
 class Level2(Level):
     def __init__(self):

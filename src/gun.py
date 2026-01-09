@@ -2,7 +2,7 @@ import os
 import sys
 import pygame
 
-from bullet import Bullet
+from src.bullet import Bullet
 
 from dotenv import load_dotenv
 load_dotenv("config.env")
@@ -15,9 +15,9 @@ class Gun(pygame.sprite.Sprite):
         screen_height = int(os.getenv("GAME_HEIGHT"))
         self._speed = int(os.getenv("GUN_SPEED"))
 
-        base_path = os.path.dirname(__file__)
-        image_path = os.path.join(base_path, "assets", "cannon.png")
-        sound_path = os.path.join(base_path, "assets", "silencer.mp3")
+        asset_path = os.path.join(os.path.dirname(__file__), "..", "assets")
+        image_path = os.path.join(asset_path, "cannon.png")
+        sound_path = os.path.join(asset_path, "silencer.mp3")
 
         width = screen_width // 10
         height = screen_height // 5

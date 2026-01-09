@@ -2,8 +2,8 @@ import os
 import sys
 import pygame
 
-from level import Level
-from balloon import Balloon
+from src.level import Level
+from src.balloon import Balloon
 
 class Level1(Level):
     def __init__(self):

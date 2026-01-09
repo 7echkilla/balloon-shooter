@@ -19,9 +19,9 @@ class Balloon(pygame.sprite.Sprite):
         self._vertical_minimum = 0 + diameter // 2
         self._vertical_maximum = screen_height - diameter // 2
 
-        base_path = os.path.dirname(__file__)
-        image_path = os.path.join(base_path, "assets", "balloon.png")
-        sound_path = os.path.join(base_path, "assets", "pop.mp3")
+        asset_path = os.path.join(os.path.dirname(__file__), "..", "assets")
+        image_path = os.path.join(asset_path, "balloon.png")
+        sound_path = os.path.join(asset_path, "pop.mp3")
         
         self.image = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (diameter, diameter))
         self.rect = self.image.get_rect()

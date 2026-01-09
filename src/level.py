@@ -2,9 +2,9 @@ import os
 import sys
 import pygame
 
-from gun import Gun
-from bullet import Bullet
-from balloon import Balloon
+from src.gun import Gun
+from src.bullet import Bullet
+from src.balloon import Balloon
 # from abc import ABC, abstractmethod
 
 class Level():
