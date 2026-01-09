@@ -44,10 +44,10 @@ class Balloon(pygame.sprite.Sprite):
         if (
             self._frames_counter <= 0
             # Redirect on bounds
-            or self.rect.left <= self._horizontal_minimum
-            or self.rect.left >= self._horizontal_maximum
-            or self.rect.top <= self._vertical_minimum
-            or self.rect.bottom >= self._vertical_maximum
+            or self.rect.centerx <= self._horizontal_minimum
+            or self.rect.centerx >= self._horizontal_maximum
+            or self.rect.centery <= self._vertical_minimum
+            or self.rect.centery >= self._vertical_maximum
         ):
             self._set_direction()
 
