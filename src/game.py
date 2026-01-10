@@ -20,7 +20,7 @@ class Game:
         self._screen = pygame.display.set_mode((self._width, self._height))
         self._clock = pygame.time.Clock()
         self._running = True
-        self._current_level = None        
+        self._level = None        
 
     def _select_level(self):
         print("Press 1 for Level 1, 2 for Level 2")
@@ -31,13 +31,15 @@ class Game:
         while self._running:
             self._handle_events()
 
-            if self._current_level:
-                self._current_level.update()
-                self._current_level.draw(self._screen)
+            if self._level:
+                self._level.update()
+                self._level.draw(self._screen)
 
-                if self._current_level.check_win_condition():
+                if self._level.check_win_condition():
                     print(f"Level Complete!")
-                    self._running = False
+                    # self._running = False
+                    self._level = None
+                    self._select_level()
 
             pygame.display.flip()
             self._clock.tick(self._fps)
@@ -48,14 +50,14 @@ class Game:
                 self._running = False
 
             if event.type == pygame.KEYDOWN:
-                if self._current_level is None:
+                if self._level is None:
                     if event.key == pygame.K_1:
-                        self._current_level = Level1()
+                        self._level = Level1()
                     if event.key == pygame.K_2:
-                        self._current_level = Level2()
+                        self._level = Level2()
                 else:
                     if event.key == pygame.K_SPACE:
-                        self._current_level.spawn_bullet()
+                        self._level.spawn_bullet()
 
     def quit(self):
         pygame.quit()
