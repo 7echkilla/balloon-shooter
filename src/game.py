@@ -20,26 +20,36 @@ class Game:
         self._screen = pygame.display.set_mode((self._width, self._height))
         self._clock = pygame.time.Clock()
         self._running = True
-        self._level = None        
 
-    def _select_level(self):
-        print("Press 1 for Level 1, 2 for Level 2")
+        self._level = None
+        self._font = pygame.font.SysFont(None, 48)        
+
+    def _draw_menu(self):
+        self._screen.fill((0, 0, 0))
+        coefficient = self._height // 3 # (3) -> number of lines to render
+
+        title = self._font.render("Select Level", True, (255, 255, 255))
+        level1 = self._font.render("Press 1 => Level 1", True, (255, 255, 255))
+        level2 = self._font.render("Press 2 => Level 2", True, (255, 255, 255))
+
+        self._screen.blit(title, (self._width // 2 - title.get_width() // 2, coefficient // 2 - title.get_height()))
+        self._screen.blit(level1, (self._width // 2 - level1.get_width() // 2, 3 * coefficient // 2 - level1.get_height()))
+        self._screen.blit(level2, (self._width // 2 - level2.get_width() // 2, 5 * coefficient // 2 - level2.get_height()))
 
     def game_loop(self):
-        self._select_level()
-
         while self._running:
             self._handle_events()
 
-            if self._level:
+            if self._level is None:
+                self._draw_menu()
+
+            else:
                 self._level.update()
                 self._level.draw(self._screen)
 
                 if self._level.check_win_condition():
                     print(f"Level Complete!")
-                    # self._running = False
                     self._level = None
-                    self._select_level()
 
             pygame.display.flip()
             self._clock.tick(self._fps)
