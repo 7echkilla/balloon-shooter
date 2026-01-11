@@ -13,7 +13,7 @@ class Balloon(pygame.sprite.Sprite):
         screen_width = int(os.getenv("GAME_WIDTH"))
         screen_height = int(os.getenv("GAME_HEIGHT"))
         self._speed = int(os.getenv("BALLOON_SPEED"))
-        diameter = screen_width // 10
+        diameter = random.randint(round(0.5 * screen_width // 10), round(1.5 * screen_width // 10))
         self._horizontal_minimum = screen_width // 2 + diameter // 2
         self._horizontal_maximum = screen_width - diameter // 2
         self._vertical_minimum = 0 + diameter // 2
