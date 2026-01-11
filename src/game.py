@@ -26,15 +26,18 @@ class Game:
 
     def _draw_menu(self):
         self._screen.fill((0, 0, 0))
-        coefficient = self._height // 3 # (3) -> number of lines to render
 
-        title = self._font.render("Select Level", True, (255, 255, 255))
-        level1 = self._font.render("Press 1 => Level 1", True, (255, 255, 255))
-        level2 = self._font.render("Press 2 => Level 2", True, (255, 255, 255))
+        text_lines = [
+            self._font.render("Select Level", True, (255, 255, 255)),
+            self._font.render("Press 1 => Level 1", True, (255, 255, 255)),
+            self._font.render("Press 2 => Level 2", True, (255, 255, 255))
+        ]
 
-        self._screen.blit(title, (self._width // 2 - title.get_width() // 2, coefficient // 2 - title.get_height()))
-        self._screen.blit(level1, (self._width // 2 - level1.get_width() // 2, 3 * coefficient // 2 - level1.get_height()))
-        self._screen.blit(level2, (self._width // 2 - level2.get_width() // 2, 5 * coefficient // 2 - level2.get_height()))
+        spacing = self._height // (len(text_lines) + 1)
+
+        for index, text_line in enumerate(text_lines, start=1):
+            rect = text_line.get_rect(center=(self._width // 2, index * spacing))
+            self._screen.blit(text_line, rect)
 
     def game_loop(self):
         while self._running:
