@@ -22,7 +22,7 @@ class Game:
         self._running = True
 
         self._level = None
-        self._font = pygame.font.SysFont(None, 48)        
+        self._font = pygame.font.SysFont(None, self._height // 9)        
 
     def _draw_menu(self):
         self._screen.fill((0, 0, 0))
