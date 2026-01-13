@@ -22,17 +22,18 @@ The project is structured using object-oriented principles:
 
 ## 📁 Project Structure
 
-<!-- .
-├── main.py
-├── README.md
-└── src
-    ├── game.py
-    ├── level.py
-    ├── level_1.py
-    ├── level_2.py
-    ├── gun.py
-    ├── bullet.py
-    └── balloon.py -->
+balloon-shooter/\
+│\
+├── main.py\
+├── src\
+│   ├── game.py\
+│   ├── level.py\
+│   ├── level_1.py\
+│   ├── level_2.py\
+│   ├── gun.py\
+│   ├── bullet.py\
+│   └── balloon.py\
+└── README.md
 
 ### File Descriptions
 - main.py: Entry point of the game. Initializes and starts the game.
