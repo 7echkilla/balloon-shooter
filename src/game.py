@@ -20,26 +20,39 @@ class Game:
         self._screen = pygame.display.set_mode((self._width, self._height))
         self._clock = pygame.time.Clock()
         self._running = True
-        self._level = None        
 
-    def _select_level(self):
-        print("Press 1 for Level 1, 2 for Level 2")
+        self._level = None
+        self._font = pygame.font.SysFont(None, self._height // 9)        
+
+    def _draw_menu(self):
+        self._screen.fill((0, 0, 0))
+
+        text_lines = [
+            self._font.render("Select Level", True, (255, 255, 255)),
+            self._font.render("Press 1 => Level 1", True, (255, 255, 255)),
+            self._font.render("Press 2 => Level 2", True, (255, 255, 255))
+        ]
+
+        spacing = self._height // (len(text_lines) + 1)
+
+        for index, text_line in enumerate(text_lines, start=1):
+            rect = text_line.get_rect(center=(self._width // 2, index * spacing))
+            self._screen.blit(text_line, rect)
 
     def game_loop(self):
-        self._select_level()
-
         while self._running:
             self._handle_events()
 
-            if self._level:
+            if self._level is None:
+                self._draw_menu()
+
+            else:
                 self._level.update()
                 self._level.draw(self._screen)
 
                 if self._level.check_win_condition():
                     print(f"Level Complete!")
-                    # self._running = False
                     self._level = None
-                    self._select_level()
 
             pygame.display.flip()
             self._clock.tick(self._fps)
