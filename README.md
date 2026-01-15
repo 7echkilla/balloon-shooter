@@ -1,6 +1,10 @@
 # 🎈 Balloon Shooter Game
 A simple 2D Balloon Shooter game built Pygame, following OOP principles. The player controls a gun to shoot moving balloons across different levels.
 
+<p align="center">
+  <img src="./screenshot.png" alt="Level 2 screenshot" />
+</p>
+
 ## 🎮 Game Overview
 - Control a gun using the keyboard
 - Shoot bullets to pop balloons
