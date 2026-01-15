@@ -22,12 +22,14 @@ The project is structured using object-oriented principles:
 
 ## 📁 Project Structure
 balloon-shooter/\
+│\
 ├── [assets](./assets/)/ # Game assets (images and sound effects)\
 │   ├── [balloon.png](./assets/balloon.png) # Balloon sprite\
 │   ├── [cannon.png](./assets/cannon.png) # Gun sprite\
 │   ├── [impact.mp3](./assets/impact.mp3) # Bullet impact sound effect\
 │   ├── [pop.mp3](./assets/pop.mp3) # Balloon pop sound effect\
 │   └── [silencer.mp3](./assets/silencer.mp3) # Shot sound effect\
+│\
 ├── [src](./src/)/ # Core game source code\
 │   ├── [balloon.py](./src/balloon.py) # Balloon entity and behavior\
 │   ├── [bullet.py](./src/bullet.py) # Bullet/projectile logic\
@@ -36,6 +38,7 @@ balloon-shooter/\
 │   ├── [level_1.py](./src/level_1.py) # Level 1 configuration and logic\
 │   ├── [level_2.py](./src/level_2.py) # Level 2 configuration and logic\
 │   └── [level.py](./src/level.py) # Base level class and shared functionality\
+│\
 ├── [.gitignore](.gitignore) # Files and folders ignored by Git\
 ├── [config.env](./config.env) # Environment and game configuration variables\
 ├── [LICENSE](./LICENSE) # Project license information\
